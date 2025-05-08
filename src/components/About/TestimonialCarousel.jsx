@@ -100,22 +100,24 @@ const TestimonialCarousel = () => {
               </div>
             </div>
 
-            {/* Thumbnails with slide-out effect for active thumbnail only */}
+            {/* Thumbnails - only active thumbnail slides out */}
             <div className="hidden md:block">
               <div className="flex flex-col gap-4">
-                {testimonials.map((testimonial, index) => (
-                  <div 
-                    key={testimonial.id}
-                    className="relative flex items-center h-16 overflow-visible"
-                    onClick={() => goToSlide(index)}
-                  >
-                    {/* Container for thumbnail and text */}
-                    <div className="relative flex items-center">
-                      {/* Thumbnail image - slides left when active */}
+                {testimonials.map((testimonial, index) => {
+                  // Determine if this thumbnail is active
+                  const isActive = index === activeIndex;
+                  
+                  return (
+                    <div 
+                      key={testimonial.id}
+                      className="relative flex items-center h-16 overflow-visible cursor-pointer"
+                      onClick={() => goToSlide(index)}
+                    >
+                      {/* Thumbnail image - slides left ONLY when active */}
                       <div 
-                        className={`w-16 h-16 rounded-full overflow-hidden cursor-pointer border-2 z-10
+                        className={`w-16 h-16 rounded-full overflow-hidden border-2 z-10
                           transition-all duration-300 ease-in-out
-                          ${index === activeIndex ? 'border-blue-600 -translate-x-4' : 'border-transparent'}`}
+                          ${isActive ? 'border-blue-600 -translate-x-4' : 'border-transparent'}`}
                       >
                         <img 
                           src={testimonial.image} 
@@ -124,22 +126,20 @@ const TestimonialCarousel = () => {
                         />
                       </div>
                       
-                      {/* Text shown only for active thumbnail */}
-                      <div 
-                        className={`ml-4 bg-blue-600 text-white py-2 px-4 rounded-r-lg 
-                          transition-all duration-300 ease-in-out cursor-pointer
-                          ${index === activeIndex ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0 invisible'}`}
-                      >
-                        <p className="whitespace-nowrap overflow-hidden text-ellipsis font-medium">
-                          {testimonial.name}
-                        </p>
-                        <p className="text-xs text-blue-200 whitespace-nowrap overflow-hidden text-ellipsis">
-                          {testimonial.title}
-                        </p>
-                      </div>
+                      {/* Text info - ONLY visible when thumbnail is active */}
+                      {isActive && (
+                        <div className="ml-4 bg-blue-600 text-white py-2 px-4 rounded-r-lg transition-all duration-300 ease-in-out">
+                          <p className="whitespace-nowrap overflow-hidden text-ellipsis font-medium">
+                            {testimonial.name}
+                          </p>
+                          <p className="text-xs text-blue-200 whitespace-nowrap overflow-hidden text-ellipsis">
+                            {testimonial.title}
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

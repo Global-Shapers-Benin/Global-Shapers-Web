@@ -5,7 +5,7 @@ import WorkSeries from '../components/Project/WorkSeries'
 
 const Project = () => {
   return (
-    <div className= "w-full">
+    <div className= "w-full mt-20">
         <ProjectCar />
         <ImpactDashboard />
         {/* <WorkSeries /> */}

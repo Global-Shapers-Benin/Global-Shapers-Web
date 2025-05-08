@@ -5,13 +5,14 @@ import BetterFuture from '../components/JoinUs/BetterFuture'
 import Footer from '../components/Footer/Footer'
 import FAQ from '../components/Contribute/FAQ'
 
+
 const JoinUs = () => {
   return (
-    <div>
+    <div className='mt-20'>
         <ContactUs />
         <BetterFuture />
         <FAQ />
-        <Footer />
+       
     </div>
   )
 }

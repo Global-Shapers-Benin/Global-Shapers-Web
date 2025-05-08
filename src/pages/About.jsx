@@ -12,7 +12,8 @@ import Footer from '../components/Footer/Footer'
 
 const About = () => {
   return (
-    <div className= "w-full">
+    <div className= "w-full mt-20">
+
         <AboutIntro />
         <AboutHero />
         <MilestonesSection />
@@ -22,7 +23,7 @@ const About = () => {
         <Shapers />
         {/* <TestimonialSection /> */}
         <TestimonialCarousel />
-        <Footer />
+        
     </div>
   )
 }

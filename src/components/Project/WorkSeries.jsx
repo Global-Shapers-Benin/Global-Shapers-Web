@@ -20,7 +20,7 @@ import JoinUsSection from "./JoinUsSection";
 const WorkSeries = () => {
   return (
     <div>
-      <div className="px-6  pt-4 md:pt-10 md:px-14 lg:20">
+      <div className="px-6 mt-20 pt-4 md:pt-10 md:px-14 lg:20">
         <div className="lg:flex py-4 md:py-8 lg:py-10 text-start">
           <div className="">
             <h2 className="font-Merriweather font-bold  text-[clamp(18px,5vw,40px)]">
@@ -191,7 +191,7 @@ const WorkSeries = () => {
       {/* <JoinUsReview /> */}
       {/* <ReviewSection /> */}
       {/* <JoinUsSection /> */}
-      <Footer />
+    
     </div>
   );
 };
