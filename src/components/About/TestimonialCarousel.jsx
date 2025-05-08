@@ -38,7 +38,6 @@ const TestimonialCarousel = () => {
   const partners = Array(6).fill("/api/placeholder/100/100");
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [hoveredThumbnail, setHoveredThumbnail] = useState(null);
 
   // Auto-advance carousel
   useEffect(() => {
@@ -107,34 +106,37 @@ const TestimonialCarousel = () => {
                 {testimonials.map((testimonial, index) => (
                   <div 
                     key={testimonial.id}
-                    className="relative flex items-center"
-                    onMouseEnter={() => setHoveredThumbnail(index)}
-                    onMouseLeave={() => setHoveredThumbnail(null)}
+                    className="relative flex items-center h-16 overflow-visible"
                     onClick={() => goToSlide(index)}
                   >
-                    <div 
-                      className={`w-16 h-16 rounded-full overflow-hidden cursor-pointer border-2 z-10
-                        ${index === activeIndex ? 'border-blue-600' : 'border-transparent'}`}
-                    >
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name}
-                        className="w-full h-full object-cover" 
-                      />
-                    </div>
-                    
-                    {/* Slide-out info box */}
-                    <div 
-                      className={`absolute left-12 bg-blue-600 text-white py-2 px-4 rounded-r-lg 
-                        transition-all duration-300 cursor-pointer
-                        ${hoveredThumbnail === index ? 'opacity-100 translate-x-0 w-40' : 'opacity-0 -translate-x-4 w-0'}`}
-                    >
-                      <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-                        {testimonial.name}
-                      </p>
-                      <p className="text-xs text-blue-200 whitespace-nowrap overflow-hidden text-ellipsis">
-                        {testimonial.title}
-                      </p>
+                    {/* Container for thumbnail and text */}
+                    <div className="relative flex items-center">
+                      {/* Thumbnail image */}
+                      <div 
+                        className={`w-16 h-16 rounded-full overflow-hidden cursor-pointer border-2 z-10
+                          transition-all duration-300 ease-in-out
+                          ${index === activeIndex ? 'border-blue-600 -translate-x-4' : 'border-transparent'}`}
+                      >
+                        <img 
+                          src={testimonial.image} 
+                          alt={testimonial.name}
+                          className="w-full h-full object-cover" 
+                        />
+                      </div>
+                      
+                      {/* Slide-out info box */}
+                      <div 
+                        className={`ml-4 bg-blue-600 text-white py-2 px-4 rounded-r-lg 
+                          transition-all duration-300 ease-in-out cursor-pointer
+                          ${index === activeIndex ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0 invisible'}`}
+                      >
+                        <p className="whitespace-nowrap overflow-hidden text-ellipsis font-medium">
+                          {testimonial.name}
+                        </p>
+                        <p className="text-xs text-blue-200 whitespace-nowrap overflow-hidden text-ellipsis">
+                          {testimonial.title}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
