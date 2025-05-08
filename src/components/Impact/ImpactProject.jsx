@@ -8,7 +8,7 @@ import tradbead from "../../assets/tradbead.png";
 import workSeries from "../../assets/worksSeries.png";
 import classChildren from "../../assets/class-children.png";
 import greenUp from "../../assets/greenUp.png";
-import ProjectsBackground from "../../assets/projects.png";
+import ProjectsBackground from "../../assets/Projects.png";
 import waterstorm from "../../assets/waterstorm.png";
 import graduate from "../../assets/graduate.png";
 
