@@ -100,7 +100,7 @@ const TestimonialCarousel = () => {
               </div>
             </div>
 
-            {/* Thumbnails with slide-out effect */}
+            {/* Thumbnails with slide-out effect for active thumbnail only */}
             <div className="hidden md:block">
               <div className="flex flex-col gap-4">
                 {testimonials.map((testimonial, index) => (
@@ -111,7 +111,7 @@ const TestimonialCarousel = () => {
                   >
                     {/* Container for thumbnail and text */}
                     <div className="relative flex items-center">
-                      {/* Thumbnail image */}
+                      {/* Thumbnail image - slides left when active */}
                       <div 
                         className={`w-16 h-16 rounded-full overflow-hidden cursor-pointer border-2 z-10
                           transition-all duration-300 ease-in-out
@@ -124,7 +124,7 @@ const TestimonialCarousel = () => {
                         />
                       </div>
                       
-                      {/* Slide-out info box */}
+                      {/* Text shown only for active thumbnail */}
                       <div 
                         className={`ml-4 bg-blue-600 text-white py-2 px-4 rounded-r-lg 
                           transition-all duration-300 ease-in-out cursor-pointer
