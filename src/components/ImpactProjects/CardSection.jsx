@@ -4,7 +4,7 @@ import tradbead from "../../assets/tradbead.png";
 import workSeries from "../../assets/worksSeries.png";
 import classChildren from "../../assets/class-children.png";
 import greenUp from "../../assets/greenUp.png";
-import ProjectsBackground from '../../assets/projects.png'; // Import the background image
+import ProjectsBackground from '../../assets/Projects.png'; // Import the background image
 
 const CardSection = () => {
   const cardsData = [
