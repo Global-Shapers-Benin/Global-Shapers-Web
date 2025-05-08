@@ -3,7 +3,7 @@ import globallogo from "../../assets/global-logo.png";
 import cylinder from "../../assets/cylinder.png";
 import DynamicButton from "../DynamicButton";
 import { FiArrowUpRight } from "react-icons/fi";
-import line from "../../assets/line.png";
+import line from "../../assets/Line.png";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
