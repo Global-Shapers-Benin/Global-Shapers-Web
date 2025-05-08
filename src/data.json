@@ -1,0 +1,15 @@
+{
+  "name": "Impact Metrics",
+  "children": [
+    {
+      "name": "Entrepreneurship",
+      "value": 100,
+      "color": "#4CAF50"
+    },
+    {
+      "name": "Education",
+      "value": 200,
+      "color": "#2196F3"
+    }
+  ]
+}

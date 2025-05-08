@@ -1,0 +1,133 @@
+#root {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+.app-content {
+  position: relative;
+  z-index: 1; /* Ensure content is above page background */
+}
+
+.page-reveal {
+  transform: translateY(100%);
+}
+
+
+
+
+
+
+.spinner-container {
+  z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+}
+
+.outer-spinner, 
+.inner-spinner,
+.innermost-spinner {  /* Added innermost to this group */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  
+}
+
+.outer-spinner {
+  width: 180px;
+  height: 180px;
+  border: 1.5px solid rgba(66, 165, 245, 0.2);
+  border-top: 1.5px solid #42a5f5;
+  border-right: 1.5px solid #42a5f5;
+  animation: rotate 2.5s linear infinite;
+  animation-direction: reverse;
+}
+
+.inner-spinner {
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(247, 234, 195, 0.2);
+  border-top: 1px solid #f1e9d8;
+  border-right: 1px solid #f1e9d7;
+  animation-direction: normal;
+  animation: rotate 2s linear infinite;
+}
+
+.innermost-spinner {
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgba(247, 234, 195, 0.2);
+  border-top: 1px solid #644707;
+  border-right: 1px solid #b3810e;
+  animation: rotate 1s linear infinite; /* Different speed */
+  animation-direction: normal; /* Changed direction */
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0turn);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+
+
+
+/* Page Reveal */
+
+/* PageRevealer.css */
+.page-transition {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+
+/* NavBar Support */
+
+@supports (backdrop-filter: blur(12px)) {
+  .nav-blur {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}

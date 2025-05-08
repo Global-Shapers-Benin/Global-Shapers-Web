@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Montserrat-med";
+  src: url("/public/fonts/Montserrat-Medium.ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Montserrat-bold";
+  src: url("/public/fonts/Montserrat-Bold.ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Montserrat-extrabold";
+  src: url("/public/fonts/Montserrat-ExtraBold.ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Montserrat-regular";
+  src: url("/public/fonts/Montserrat-Regular.ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Montserrat-light";
+  src: url("/public/fonts/Montserrat-Light.ttf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Merriweather-reg";
+  src: url("/public/fonts/Merriweather_24pt-Regular.ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Merriweather-semi";
+  src: url("/public/fonts/Merriweather_36pt_SemiCondensed-Bold.ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Merriweather-light";
+  src: url("/public/fonts/Merriweather_36pt_SemiCondensed-Light.ttf");
+  font-style: normal;
+}
+
+@layer components {
+  h1, h2 {
+    @apply font-Merrylight;
+    font-weight: 200; /* Default font-weight */
+  }
+
+  @media (min-width: 640px) {
+    h1, h2 {
+      @apply font-Merriweather;
+      font-weight: 300; /* Small screens */
+    }
+  }
+
+  @media (min-width: 768px) {
+    h1, h2 {
+      font-weight: 500; /* Medium screens */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1, h2 {
+      font-weight: 600; /* Large screens */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    h1, h2 {
+      font-weight: 700; /* Extra-large screens */
+    }
+  }
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #1a1a1a;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
