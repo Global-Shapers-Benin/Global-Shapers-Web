@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import lj from "../../assets/lj.png"
+import ma from "../../assets/ma.jpg"
+import ao from "../../assets/ao.jpg"
+import pt from "../../assets/pt.jpg"
+import de from "../../assets/de.jpg"
+
 
 const TestimonialCarousel = () => {
   // Sample testimonial data
@@ -8,30 +14,37 @@ const TestimonialCarousel = () => {
       id: 1,
       name: "Lisa Johnson",
       title: "Consulting",
-      image: "/api/placeholder/200/200",
+      image: lj,
       quote: "The Global Shapers Benin Hub has been an incredible force for positive change in our community. Their commitment to empowering young leaders and driving impactful projects is truly inspiring. Through their initiatives, I've witnessed tangible improvements in areas like education, entrepreneurship, and cultural preservation."
     },
     {
       id: 2,
       name: "Michael Adams",
       title: "Community Developer",
-      image: "/api/placeholder/200/200",
+      image: ma,
       quote: "Working alongside Global Shapers Benin City has transformed my perspective on what's possible when young people take initiative. Their focus on sustainable development projects has created real change in our region."
+    },
+    {
+      id: 4,
+      name: "Prince Terry",
+      title: "Tech Entrepreneur",
+      image: pt,
+      quote: "As a tech founder, I've been impressed by Global Shapers Benin City's innovative approach to solving local challenges. Their mentorship program has launched several successful startups that are now creating jobs in our community."
     },
     {
       id: 3,
       name: "Amara Okafor",
       title: "Education Advocate",
-      image: "/api/placeholder/200/200",
+      image: ao,
       quote: "The dedication of the Global Shapers Benin team to educational advancement has been remarkable. Their literacy programs have reached hundreds of children who previously had limited access to quality learning resources."
     },
     {
       id: 4,
       name: "Daniel Effiong",
       title: "Tech Entrepreneur",
-      image: "/api/placeholder/200/200",
+      image: de,
       quote: "As a tech founder, I've been impressed by Global Shapers Benin City's innovative approach to solving local challenges. Their mentorship program has launched several successful startups that are now creating jobs in our community."
-    }
+    },
   ];
 
   // Sample partner logos
@@ -80,11 +93,11 @@ const TestimonialCarousel = () => {
           {/* Carousel slider */}
           <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
             {/* Person image */}
-            <div className="w-64 h-64 flex-shrink-0">
+            <div className="w-64 h-74 flex-shrink-0">
               <img 
                 src={activeTestimonial.image} 
                 alt={activeTestimonial.name}
-                className="w-full h-full object-cover rounded-full shadow-md" 
+                className="w-full h-full object-cover rounded-md shadow-md" 
               />
             </div>
 
