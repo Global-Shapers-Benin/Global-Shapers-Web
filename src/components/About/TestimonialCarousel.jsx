@@ -5,6 +5,7 @@ import ma from "../../assets/ma.jpg"
 import ao from "../../assets/ao.jpg"
 import pt from "../../assets/pt.jpg"
 import de from "../../assets/de.jpg"
+import logo from "../../assets/nysc.png"
 
 
 const TestimonialCarousel = () => {
@@ -48,7 +49,7 @@ const TestimonialCarousel = () => {
   ];
 
   // Sample partner logos
-  const partners = Array(6).fill("/api/placeholder/100/100");
+  const partners = Array(6).fill(logo);
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -82,7 +83,7 @@ const TestimonialCarousel = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Main element */}
-      <div className="flex-1 px-4 py-8 md:px-16 md:py-12">
+      <div className="flex-1 px-4 py-8 md:px-16 md:py-20">
         {/* Header */}
         <h1 className="text-3xl font-bold text-gray-900 mb-12 text-center">
           See what others have to say about Global Shapers Benin City
@@ -158,7 +159,7 @@ const TestimonialCarousel = () => {
           </div>
 
           {/* Navigation arrows */}
-          <div className="flex justify-center gap-4 mt-8">
+          <div className="flex justify-center gap-4 my-8">
             <button 
               onClick={goToPrevious}
               className="w-12 h-12 rounded-full bg-blue-700 text-white flex items-center justify-center hover:bg-blue-800 transition-colors"
@@ -178,10 +179,10 @@ const TestimonialCarousel = () => {
       </div>
 
       {/* Partners section */}
-      <div className="bg-blue-700 text-white py-12 px-8">
+      <div className="bg-[#00529B] text-white py-12 ">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-12">Our partners</h2>
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="flex flex-wrap justify-between gap-8">
             {partners.map((logo, index) => (
               <div key={index} className="bg-white rounded-full p-4 flex items-center justify-center w-24 h-24">
                 <img src={logo} alt={`Partner ${index + 1}`} className="w-full h-auto" />

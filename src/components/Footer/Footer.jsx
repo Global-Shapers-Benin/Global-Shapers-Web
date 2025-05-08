@@ -118,7 +118,7 @@ const Footer = () => {
 
           <div className="md:col-span-1 flex flex-col gap-3 text-start items-start">
             <h3 className="text-2xl  font-bold mb-4">
-              Subscribe to our <span className="text-blue-500">Newsletter</span>
+              Subscribe to our <br /> <span className="text-blue-500">Newsletter</span>
             </h3>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <input
