@@ -14,14 +14,14 @@ const DynamicButton = ({
       href={link}
       role={type === "button" ? "button" : undefined}
       onClick={onClick}
-      className={`flex gap-0.5 relative items-center ${className}`}
+      className={`flex  gap-0.5 relative items-center ${className}`}
       aria-label={text || "Dynamic button"}
     >
-      <div className="bg-blue-700 px-4 py-2 font-Merriweather rounded-full font-semibold shadow-lg hover:bg-blue-800 transition-colors duration-200">
+      <div className="bg-[#00529B] px-4 py-2 font-Merriweather rounded-full font-semibold shadow-lg hover:bg-blue-800 transition-colors duration-200">
         {text}
       </div>
-      <div className="w-2 h-5 bg-blue-700 absolute right-[24%]"></div>
-      <div className="bg-blue-700 rounded-full p-2 hover:bg-blue-800 transition-colors duration-200">
+      <div className="-z-20 w-16 h-5 bg-[#00529B] absolute left-[40%] "></div>
+      <div className="bg-[#00529B] rounded-full p-2 hover:bg-blue-800 transition-colors duration-200">
         <ArrowUpRight className="w-6 h-6" />
       </div>
     </a>

@@ -44,7 +44,7 @@ const FAQ = () => {
   );
 
   return (
-    <div ref={container} className="px-5 pt-10 mb-10 text-justify bg-[#252525]">
+    <div ref={container} className="px-5 pt-10 mb-10 text-justify ">
       <div className="max-w-[48.88rem] mx-auto">
         <h1 className="heading mb-6 faq_title text-3xl font-bold text-white">
           Frequently Asked Questions

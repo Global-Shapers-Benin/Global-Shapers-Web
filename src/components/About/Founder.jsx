@@ -21,10 +21,10 @@ const FounderSection = () => {
       </div>
 
       {/* Bottom portion: black strip */}
-      <div className="w-full h-[clamp(500px,10vh,500px)] bg-black" />
+      <div className="w-full h-[clamp(500px,12vh,700px)]  bg-black" />
 
       {/* Content that sits on top, spanning across the backgrounds */}
-      <div className="absolute text-start top-0 left-0 w-full flex flex-col justify-center px-6  md:px-20  py-4">
+      <div className="absolute text-start top-0 left-0 w-full flex flex-col justify-center px-6  md:px-20  py-4 md:py-12">
         {/* Heading */}
         <h2 className="text-[clamp(1.04rem,2.4vw,4rem)] text-[#121212] font-Merriweather font-bold mb-1">
           Meet the Founder

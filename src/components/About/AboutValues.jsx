@@ -75,7 +75,7 @@ const AboutValues = () => {
               20 projects completed
             </p>
             <a
-              href="#"
+              href="/projects"
               className="text-[#207521] font-bold flex items-center"
               style={{ fontSize: "clamp(1rem, 3vw, 1.25rem)" }}
             >

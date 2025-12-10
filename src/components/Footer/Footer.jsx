@@ -4,6 +4,7 @@ import cylinder from "../../assets/cylinder.png";
 import DynamicButton from "../DynamicButton";
 import { FiArrowUpRight } from "react-icons/fi";
 import line from "../../assets/Line.png";
+import joinBtn from "../../assets/joinBtn.png";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -42,7 +43,7 @@ const Footer = () => {
                 difference.
               </h2>
               
-                <DynamicButton text="Join Us" className="text-sm" />
+                <a href="/contact"><img src={joinBtn} alt="" /></a>
               
             </div>
 
@@ -116,11 +117,11 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="md:col-span-1 flex flex-col gap-3 text-start items-start">
-            <h3 className="text-2xl  font-bold mb-4">
+          <div className="md:col-span-1 flex flex-col gap-3 text-start items-start md:items-center">
+            <h3 className="text-3xl  font-bold mb-4 w-2/3">
               Subscribe to our <br /> <span className="text-blue-500">Newsletter</span>
             </h3>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-2/3">
               <input
                 type="email"
                 placeholder="name@email.com"

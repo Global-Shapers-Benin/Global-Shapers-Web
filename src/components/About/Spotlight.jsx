@@ -12,7 +12,7 @@ const Spotlight = () => {
         <div className="flex justify-between pb-12">
           <h2 className="font-bold text-[clamp(1.3rem,3vw,3rem)]">Cultural Spotlight</h2>
           <a
-            href="#"
+            href="/projects"
             className="text-[#00529B] font-bold text-[1rem,2vw,2rem] flex items-center"
           >
             See all projects <ArrowUpRight className=" w-5 h-5 ml-3" size={5} />

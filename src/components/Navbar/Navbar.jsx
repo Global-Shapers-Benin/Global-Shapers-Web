@@ -88,7 +88,7 @@ const Navbar = () => {
             </button>
 
             <div className="hidden md:block">
-              <DynamicButton text="Contribute" link="/contribute" />
+              <DynamicButton text="Contribute" link="/donation" />
             </div>
 
             <button

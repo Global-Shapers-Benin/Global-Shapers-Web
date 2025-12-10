@@ -121,7 +121,7 @@ const ProjectCar = () => {
         </div>
 
         {/* Mobile Filter Icon */}
-        <div className="block md:hidden flex justify-end mb-6">
+        <div className="md:hidden flex justify-end mb-6">
           <button
             onClick={() => setIsFilterOpen(true)}
             className="p-2 bg-black text-white rounded-full"

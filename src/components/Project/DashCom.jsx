@@ -1,10 +1,55 @@
-import { useState, useMemo, useEffect } from "react";
-import { Chart } from "react-google-charts";
+import React, { useMemo, useState, useEffect, useRef } from "react";
+import { Bubble } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  LinearScale,
+  PointElement,
+  Tooltip,
+  Legend,
+  Title,
+} from "chart.js";
 import { ArrowRight } from "lucide-react";
-import { useResizeDetector } from "react-resize-detector";
-import Footer from "../Footer/Footer";
+import ellipse from "../../assets/Ellipse 1.png";
+import ellipses from "../../assets/Ellipse 2.png";
+
+ChartJS.register(LinearScale, PointElement, Tooltip, Legend, Title);
+
+/* --- USER TUNABLES --- */
+const FILL_ALPHA = 0.28;
+const BORDER_ALPHA = 0.95;
+const BORDER_WIDTH = 2;
+const HOVER_BORDER_WIDTH = 3.5;
+
+const categoryColors = {
+  "Clean water & Sanitation": "#FFAE4C",
+  "Decent work & Economic growth": "#6B4EFF",
+  "Reduced Inequalities": "#A855F7",
+  "Climate Action": "#22C55E",
+  "Partnership for the Goals": "#EF4444",
+};
+
+function hexToRgba(hex, alpha = 1) {
+  const cleaned = hex.replace("#", "");
+  const bigint = parseInt(cleaned, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+const mapCategoryToSDG = (cat) => {
+  if (!cat) return "Partnership for the Goals";
+  const s = String(cat).toLowerCase();
+  if (s.includes("entrepreneur") || s.includes("business"))
+    return "Decent work & Economic growth";
+  if (s.includes("educat") || s.includes("school"))
+    return "Reduced Inequalities";
+  if (s.includes("environ") || s.includes("climat")) return "Climate Action";
+  return "Clean water & Sanitation";
+};
 
 const bubbleData = [
+  /* ...your existing bubbleData... */
   {
     projects: 4,
     impact: 800,
@@ -168,197 +213,247 @@ const bubbleData = [
   },
 ];
 
-const headerRow = [
-  "",
-  "Number of Projects",
-  "Impact Metrics",
-  "Category",
-  "Size",
-];
-
 const months = [
-  { value: 1, label: "January" },
-  { value: 2, label: "February" },
-  { value: 3, label: "March" },
-  { value: 4, label: "April" },
-  { value: 5, label: "May" },
-  { value: 6, label: "June" },
-  { value: 7, label: "July" },
-  { value: 8, label: "August" },
-  { value: 9, label: "September" },
-  { value: 10, label: "October" },
-  { value: 11, label: "November" },
-  { value: 12, label: "December" },
+  { value: 1, label: "January 2024" },
+  { value: 2, label: "February 2024" },
+  { value: 3, label: "March 2024" },
+  { value: 4, label: "April 2024" },
+  { value: 5, label: "May 2024" },
+  { value: 6, label: "June 2024" },
+  { value: 7, label: "July 2024" },
+  { value: 8, label: "August 2024" },
+  { value: 9, label: "September 2024" },
+  { value: 10, label: "October 2024" },
+  { value: 11, label: "November 2024" },
+  { value: 12, label: "December 2024" },
 ];
 
-export default function ImpactDashboard() {
+export default function ImpactDashboardChartJS() {
+  const chartContainerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(1200);
   const [fromMonth, setFromMonth] = useState(1);
   const [toMonth, setToMonth] = useState(12);
-  const [chartError, setChartError] = useState(false);
-  const [chartLoading, setChartLoading] = useState(true);
-  const { ref } = useResizeDetector();
+  const [loading, setLoading] = useState(true);
 
-  const filteredBubbles = useMemo(() => 
-    bubbleData.filter(item => {
-      const month = item.date.getMonth() + 1;
-      return month >= fromMonth && month <= toMonth;
-    }),
-  [fromMonth, toMonth]);
+  // Responsive container width tracking
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      if (entries[0]) setContainerWidth(entries[0].contentRect.width);
+    });
+    if (chartContainerRef.current) observer.observe(chartContainerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
-  // Add this useEffect right after your state declarations
-useEffect(() => {
-  if (fromMonth > toMonth) {
-    setToMonth(fromMonth);
-  }
-}, [fromMonth, toMonth]);
+  useEffect(() => {
+    if (fromMonth > toMonth) setToMonth(fromMonth);
+  }, [fromMonth, toMonth]);
 
-  const chartData = useMemo(() => [
-    headerRow,
-    ...filteredBubbles.map(item => [
-      "",
-      item.projects,
-      item.impact,
-      item.category,
-      item.size,
-    ]),
-  ], [filteredBubbles]);
+  const sanitized = useMemo(() => {
+    return bubbleData
+      .map((r) => {
+        const date = r.date instanceof Date ? r.date : new Date(r.date);
+        const projects = Number(r.projects ?? NaN);
+        const impact = Number(r.impact ?? NaN);
+        const size = Number(r.size ?? NaN);
+        const category = mapCategoryToSDG(r.category);
+        return { date, projects, impact, size, category };
+      })
+      .filter((r) => {
+        const month = r.date.getMonth() + 1;
+        return month >= fromMonth && month <= toMonth;
+      });
+  }, [fromMonth, toMonth]);
 
-  const chartOptions = useMemo(() => ({
-    title: "Impact Metrics",
-    hAxis: {
-      title: "Number of Projects",
-      minValue: 0,
-      textStyle: { color: '#374151' },
-      titleTextStyle: { fontSize: 14 }
-    },
-    vAxis: {
-      title: "Impact Metrics",
-      minValue: 0,
-      textStyle: { color: '#374151' },
-      titleTextStyle: { fontSize: 14 }
-    },
-    bubble: {
-      textStyle: { fontSize: 0 },
-      opacity: 0.8,
-    },
-    colors: ["#FFAE4C", "#00529B", "#228B22"],
-    chartArea: {
-      width: '85%',
-      height: '75%',
-      left: 100,
-      top: 60,
-      backgroundColor: '#f9fafb'
-    },
-    legend: {
-      position: 'top',
-      alignment: 'center',
-      textStyle: { color: '#374151' }
-    },
-    titleTextStyle: {
-      color: '#1f2937',
-      fontSize: 18,
-      bold: true
-    },
-    backgroundColor: 'transparent',
-    animation: {
-      startup: true,
-      duration: 1000,
-      easing: 'out'
+  // dynamically scale bubble radius based on container width
+  const radiusFromSize = (size) =>
+    Math.max(4, Math.sqrt(size) * 2.5 * (containerWidth / 1200));
+
+  const datasets = useMemo(() => {
+    const groups = {};
+    for (const row of sanitized) {
+      groups[row.category] = groups[row.category] || [];
+      groups[row.category].push({
+        x: row.projects,
+        y: row.impact,
+        r: radiusFromSize(row.size),
+        _size: row.size,
+      });
     }
-  }), []);
+
+    return Object.entries(groups).map(([category, dataPoints]) => {
+      const hex = categoryColors[category] || "#999999";
+      return {
+        label: category,
+        data: dataPoints,
+        backgroundColor: hexToRgba(hex, FILL_ALPHA),
+        borderColor: hexToRgba(hex, BORDER_ALPHA),
+        borderWidth: BORDER_WIDTH,
+        hoverBackgroundColor: hexToRgba(hex, Math.min(0.45, FILL_ALPHA + 0.12)),
+        hoverBorderColor: hexToRgba("#000000", 0.08),
+        hoverBorderWidth: HOVER_BORDER_WIDTH,
+      };
+    });
+  }, [sanitized, containerWidth]);
+
+  const chartDataForJS = useMemo(() => ({ datasets }), [datasets]);
+
+  const options = useMemo(
+    () => ({
+      maintainAspectRatio: false,
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (context) => {
+              const raw = context.raw || {};
+              const cat = context.dataset?.label ?? "";
+              return `${cat} — Projects: ${raw.x}, Impact: ${raw.y}, Size: ${raw._size}`;
+            },
+          },
+          padding: 8,
+          displayColors: false,
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Number of projects",
+            color: "#6b7280",
+            font: { size: 13 },
+          },
+          ticks: { color: "#6b7280" },
+          grid: { color: "rgba(230,233,235,0.9)", borderDash: [4, 4] },
+          min: 0,
+        },
+        y: {
+          title: {
+            display: true,
+            text: "Impact Metrics",
+            color: "#6b7280",
+            font: { size: 13 },
+          },
+          ticks: { color: "#6b7280" },
+          grid: { color: "rgba(230,233,235,0.9)", borderDash: [4, 4] },
+          min: 0,
+        },
+      },
+    }),
+    []
+  );
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 200);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
-    <div>
-      <div className="bg-[#F0F7EC] py-10">
-        <div className="max-w-3xl mx-auto text-center px-6">
-          <p className="text-lg font-Montserrat text-start text-gray-900 font-medium">
-            "Explore our dynamic impact dashboard that showcases how{" "}
-            <span className="text-[#228B22] font-semibold">
-              Global Shapers Benin
-            </span>{" "}
-            is driving meaningful change locally and contributing to the global{" "}
-            <span className="text-[#228B22] font-semibold">
-              Sustainable Development Goals (SDGs).
-            </span>
-            "
-          </p>
+    <div className="bg-[#F0F7EC] py-10">
+      <div className="max-w-6xl mx-auto text-center md:text-start px-4 md:px-6 lg:px-8">
+        <p className="text-[clamp(1rem,2vw,1.5rem)] md:text-[clamp(1.25rem,2.5vw,1.75rem)] text-gray-900 font-medium leading-relaxed">
+          “Explore our dynamic impact dashboard that showcases how{" "}
+          <span className="text-[#228B22] font-semibold">
+            Global Shapers Benin
+          </span>{" "}
+          is driving meaningful change locally and contributing to the global{" "}
+          <span className="text-[#228B22] font-semibold">
+            Sustainable Development Goals (SDGs).
+          </span>
+          ”
+        </p>
+      </div>
+
+      {/* Chart Card */}
+      <div className="max-w-6xl mx-auto mt-8 bg-white rounded-lg p-4 md:p-6 lg:p-8 border border-green-200">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 mb-4">
+          <h3 className="text-[clamp(1rem,2vw,1.6rem)] font-semibold text-black">
+            Dashboard
+          </h3>
+          <div className="flex flex-wrap items-center gap-3 md:gap-4">
+            <select
+              value={fromMonth}
+              onChange={(e) => setFromMonth(Number(e.target.value))}
+              className="border border-gray-200 rounded-md py-1 px-3 text-gray-900 bg-white"
+            >
+              {months.map((m) => (
+                <option key={m.value} value={m.value}>
+                  {m.label}
+                </option>
+              ))}
+            </select>
+            <span className="text-gray-700">—</span>
+            <select
+              value={toMonth}
+              onChange={(e) => setToMonth(Number(e.target.value))}
+              className="border border-gray-200 rounded-md py-1 px-3 text-gray-900 bg-white"
+            >
+              {months.map((m) => (
+                <option key={m.value} value={m.value}>
+                  {m.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div className="max-w-5xl mx-auto mt-8 bg-white shadow-md rounded-lg p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-[clamp(0.8rem,2vw,1.8rem)] text-black font-Montserrat-reg">Dashboard</h3>
-            <div className="flex gap-4 items-center">
-              <div className="flex flex-col">
-                <select
-                  value={fromMonth}
-                  onChange={(e) => setFromMonth(Number(e.target.value))}
-                  className="border rounded-md py-1 text-gray-700 bg-transparent text-[clamp(0.6rem,2vw,1rem)]"
-                >
-                  {months.map((m) => (
-                    <option key={m.value} value={m.value}>
-                      {m.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col">
-                <select
-                  value={toMonth}
-                  onChange={(e) => setToMonth(Number(e.target.value))}
-                  className="border rounded-md py-1 text-gray-700 bg-transparent text-[clamp(0.6rem,2vw,1rem)]"
-                >
-                  {months.map((m) => (
-                    <option key={m.value} value={m.value}>
-                      {m.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+        <div
+          ref={chartContainerRef}
+          className="w-full relative"
+          style={{ minHeight: "35vh", height: "60vh" }}
+        >
+          {loading ? (
+            <div className="flex items-center justify-center h-full text-gray-500">
+              Loading impact metrics...
             </div>
-          </div>
-
-          <div ref={ref} className="w-full h-[60vh] min-h-[350px] overflow-auto relative">
-            {chartError ? (
-              <div className="text-red-500 p-4">
-                Failed to load chart. Please try refreshing.
-              </div>
-            ) : (
-              <>
-                {chartLoading && (
-                  <div className="text-center p-4 text-gray-500">
-                    Loading impact metrics...
-                  </div>
-                )}
-                <Chart
-                  chartType="BubbleChart"
-                  width="100%"
-                  height="100%"
-                  data={chartData}
-                  options={chartOptions}
-                  rootProps={{ 'data-testid': '1' }}
-                  chartEvents={[
-                    {
-                      eventName: 'ready',
-                      callback: () => setChartLoading(false),
-                    }
-                  ]}
-                  onError={() => setChartError(true)}
-                />
-              </>
-            )}
-          </div>
+          ) : datasets.length === 0 ? (
+            <div className="flex items-center justify-center h-full text-gray-600">
+              No data for the selected date range.
+            </div>
+          ) : (
+            <Bubble data={chartDataForJS} options={options} />
+          )}
         </div>
 
-        <div className="bg-[#228B22] text-white text-center py-6 mt-10">
-          <h3 className="text-lg font-semibold">
+        {/* Custom legend */}
+        <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-5 text-sm text-gray-700">
+          {Object.entries(categoryColors).map(([label, color]) => (
+            <div key={label} className="flex items-center gap-2 select-none">
+              <span
+                style={{
+                  width: 10,
+                  height: 10,
+                  backgroundColor: color,
+                  borderRadius: "999px",
+                }}
+              />
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="max-w-6xl mx-auto mt-10 relative flex flex-col md:flex-row items-center justify-center md:justify-between bg-[#228B22] rounded-xl text-white px-6 py-10 overflow-hidden">
+        <img
+          src={ellipse}
+          alt=""
+          className="absolute max-w-[140px] right-0 bottom-0 rounded-r-xl"
+        />
+        <img
+          src={ellipses}
+          alt=""
+          className="absolute max-w-[80px] left-0 bottom-0 rounded-l-xl"
+        />
+        <div className="text-center z-10 flex-1">
+          <h3 className="text-[clamp(1.25rem,2vw,2rem)] font-semibold mb-3">
             Join Us in Making a Difference
           </h3>
-          <button className="mt-3 px-5 py-2 bg-white text-green-700 rounded-lg flex items-center mx-auto shadow-md">
-            Join Us <ArrowRight className="ml-2" />
+          <button className="inline-flex items-center gap-2 bg-white text-green-700 px-5 py-2 rounded-full shadow">
+            Join Us <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Top section images
 import samuel from "../../assets/samuel.png";
@@ -30,12 +31,16 @@ const Shapers = () => {
     <div>
       {/* Top Section - Static Content */}
       <div className="bg-[#F0F7FF]  p-[clamp(1.5rem,2vw,5rem)] text-black text-start">
-        <h2 className="font-bold text-[clamp(1.8rem,2vw,40px)] font-Merriweather">Meet the Shapers</h2>
+        <h2 className="font-bold text-[clamp(1.8rem,2vw,40px)] font-Merriweather">
+          Meet the Shapers
+        </h2>
         <div className="flex justify-between items-center lg:p-12">
           <div className="lg:flex  justify-between gap-4">
-            <img src={samuel} alt="Samuel Obakpolo" className="w-full"/>
+            <img src={samuel} alt="Samuel Obakpolo" className="w-full" />
             <div className="flex flex-col self-end">
-              <h2 className="text-[clamp(1rem,2vw,24px)] font-Merriweather font-bold">Samuel Obakpolo</h2>
+              <h2 className="text-[clamp(1rem,2vw,24px)] font-Merriweather font-bold">
+                Samuel Obakpolo
+              </h2>
               <p className="text-[clamp(0.5rem,2vw,14px)] font-Montserrat-Lite font-medium text-[#7C7C7C]">
                 Current Curator
               </p>
@@ -50,7 +55,9 @@ const Shapers = () => {
           <div className="lg:flex justify-between gap-4">
             <img src={sandra} alt="Sandra" className="w-full" />
             <div className="flex flex-col self-end">
-              <h2 className="text-[clamp(1rem,2vw,24px)] font-Merriweather font-bold">Sandra Ogini</h2>
+              <h2 className="text-[clamp(1rem,2vw,24px)] font-Merriweather font-bold">
+                Sandra Ogini
+              </h2>
               <p className="text-[clamp(0.5rem,2vw,14px)] font-Montserrat-Lite font-medium text-[#7C7C7C]">
                 Vice - Curator
               </p>
@@ -65,14 +72,30 @@ const Shapers = () => {
       </div>
 
       {/* Bottom Section: Swiper Slider */}
-      <div className="my-8 ml-[clamp(1.4rem,2vw,4rem)] px-4">
+      <div className="my-8 ml-[clamp(1.4rem,2vw,4rem)] px-4 relative">
+        <button className="custom-prev absolute left-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full z-10">
+          <ChevronLeft />
+        </button>
+        <button className="custom-next absolute right-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full z-10">
+          <ChevronRight />
+        </button>
+
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
           modules={[Navigation, Pagination, Autoplay]}
-          navigation
-          pagination={{ clickable: true }}
+          navigation={{
+            prevEl: ".custom-prev",
+            nextEl: ".custom-next",
+          }}
+          onInit={(swiper) => {
+            swiper.params.navigation.prevEl = ".custom-prev";
+            swiper.params.navigation.nextEl = ".custom-next";
+            swiper.navigation.init();
+            swiper.navigation.update();
+          }}
+          // pagination={{ clickable: true,  }}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
@@ -104,7 +127,9 @@ const Shapers = () => {
                 </div>
               </div>
               <div className="text-start flex my-4 flex-col gap-2">
-                <h2 className="font-bold font-Merriweather text-[clamp(1rem,2vw,24px)]">{person.name}</h2>
+                <h2 className="font-bold font-Merriweather text-[clamp(1rem,2vw,24px)]">
+                  {person.name}
+                </h2>
                 <p className="text-[#DCDCDC] font-Montserrat-reg text-[clamp(0.7rem,2vw,16px)] font-medium">
                   {person.role}
                 </p>

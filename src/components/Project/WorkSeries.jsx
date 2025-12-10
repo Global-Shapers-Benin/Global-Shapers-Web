@@ -186,8 +186,9 @@ const WorkSeries = () => {
         </div>
         <div className="w-full h-[2px] bg-gray-300 my-8"></div>
         <RoadAhead />
+        <div className="w-full h-[2px] bg-gray-300 my-8"></div>
       </div>
-      <div className="mb-20">you inclusive</div>
+     
       {/* <JoinUsReview /> */}
       {/* <ReviewSection /> */}
       {/* <JoinUsSection /> */}

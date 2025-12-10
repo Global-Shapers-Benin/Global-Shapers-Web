@@ -5,9 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Home from './pages/Home';
 import About from './pages/About';
 import Project from './pages/Project';
-import JoinUs from './pages/JoinUs';
 import Preloader from './components/ui/Preloader';
 import './App.css';
+import Contact from './pages/Contact';
+import JoinUs from './components/JoinUs/JoinUs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,6 +41,7 @@ function AppRouter() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Project />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/join-us" element={<JoinUs />} />
         </Routes>
       </div>

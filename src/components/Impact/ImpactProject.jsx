@@ -57,38 +57,43 @@ const ImpactProjects = () => {
 
       <div className="relative z-10">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-[clamp(1rem,3.4vw,3rem)] font-Merriweather">
+          <h2 className="sm:text-[clamp(1rem,3.4vw,3rem)] text-[18px] font-bold font-Merriweather">
             Impact Projects
           </h2>
           <a
             href="#"
-            className="text-blue-500 flex items-center gap-1 hover:underline"
+            className="text-blue-500 text-[clamp(1rem,2vw,1.2rem)] flex items-center gap-1 hover:underline"
           >
             Explore <FiArrowUpRight />
           </a>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 ">
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group relative overflow-hidden shadow-lg transition-all duration-500"
+              className="group relative overflow-hidden shadow-lg transition-all duration-500 border md:border-none"
             >
-              {/* Image and Hover Effect */}
+              {/* Image */}
               <div className="relative overflow-hidden">
                 <LazyLoadImage
                   src={project.image}
                   alt={project.title}
                   effect="blur"
-                  className="w-full h-full object-cover transition-all duration-500 group-hover:blur-sm group-hover:rounded-2xl"
+                  className="w-full h-full object-cover transition-all duration-500 lg:group-hover:blur-sm lg:group-hover:rounded-2xl"
                 />
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-70 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-start">
+
+                {/* ✅ OVERLAY – Desktop Only */}
+                <div className="hidden lg:block absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-70 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-start">
                   <h3 className="text-xl font-bold">{project.title}</h3>
-                  <p className="text-sm mt-2">{project.description}</p>
+                  <p className="text-sm mt-2">
+                    {project.description}
+                  </p>
                 </div>
               </div>
 
-              {/* Space between Image and Bottom Div */}
-              <div className="mt-4 flex justify-between items-center p-4">
+              {/* ✅ UNTOUCHED - Bottom bar */}
+              <div className="sm:mt-4 flex justify-between items-center p-4 bg-[#676767]">
                 <h3 className="text-[clamp(0.8rem,2vw,4rem)] text-start font-Montserrat font-semibold">
                   {project.title}
                 </h3>
@@ -98,6 +103,7 @@ const ImpactProjects = () => {
                   </div>
                 </a>
               </div>
+
             </div>
           ))}
         </div>

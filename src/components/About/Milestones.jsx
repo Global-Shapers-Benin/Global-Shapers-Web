@@ -91,8 +91,8 @@ const MilestonesSection = () => {
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={30}
-          slidesPerView={1}
-          navigation
+          slidesPerView={1.2}
+          
           pagination={{ clickable: true }}
           breakpoints={{
             640: { slidesPerView: 1 },
@@ -106,13 +106,13 @@ const MilestonesSection = () => {
                 <img
                   src={milestone.image}
                   alt={milestone.title}
-                  className="w-full h-[300px] object-cover"
+                  className="w-full h-[220px] object-cover"
                 />
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                   <FiPlayCircle className="text-white text-6xl" />
                 </div>
                 <div className="p-6 bg-[#222222] rounded-b-2xl">
-                  <h3 className="text-2xl font-bold">{milestone.title}</h3>
+                  <h3 className="text-xl font-bold">{milestone.title}</h3>
                   <p className="mt-2">{milestone.description}</p>
                   <p className="text-sm text-gray-400">{milestone.note}</p>
                   <button className="mt-4 px-4 py-2 bg-[#00529B] text-white rounded-full hover:bg-[#003C7A] transition duration-300">

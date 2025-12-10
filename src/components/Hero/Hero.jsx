@@ -4,6 +4,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import heroimg from "../../assets/heroimg.png";
 import DynamicButton from "../DynamicButton";
 import { FiArrowUpRight } from "react-icons/fi";
+import btnMob from "../../assets/btnMob.png";
 
 const Hero = () => {
   return (
@@ -20,9 +21,9 @@ const Hero = () => {
       />
 
       {/* SVG Speech Bubble positioned on top of the image */}
-      <div className="absolute top-6 lg:top-10 md:top-8 left-16 sm:left-16  md:left-20 lg:left-28 w-[75%] sm:w-[40%] md:w-[70%] lg:w-[45%] max-w-[510px]">
+      <div className="absolute top-6 lg:top-10 md:top-8 left-10 sm:left-16  md:left-20 lg:left-28 w-[75%] sm:w-[40%] md:w-[80%] lg:w-[60%] max-w-[550px]">
         <svg
-          className="w-[70%] sm:w-full md:w-full h-auto md:h-full"
+          className="w-[80%] sm: sm:w-full md:w-full h-auto md:h-full"
           viewBox="0 0 510 420"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -36,12 +37,12 @@ const Hero = () => {
 
           {/* Main Heading with fluid text size */}
           <text
-            x="8%"
+            x="20%"
             y="15%"
             fill="white"
             fontWeight="bold"
             fontFamily=""
-            className="text-[clamp(2.3rem,3vw,4rem)]"
+            className="text-[clamp(2.4rem,2.5vw,3rem)]"
           >
             <tspan x="8%" dy="0">
               Empowering Change
@@ -58,20 +59,22 @@ const Hero = () => {
           </text>
 
           {/* 'Explore the hub' Button with fluid text size */}
-          <foreignObject x="8%" y="60%" width="50%" height="15%">
+          <foreignObject x="8%" y="60%" width="60%" height="30%">
             <div xmlns="http://www.w3.org/1999/xhtml">
               <DynamicButton
                 text="Explore the hub"
-                className="text-white py-2 rounded-full text-[clamp(0.875rem,2vw,1rem)]"
+                className="text-white py-2 rounded-full hidden md:flex  md:text-[clamp(0.875rem,2vw,1rem)]"
+                link="/about"
               />
             </div>
+            <img src={btnMob} alt="" className="md:hidden" />
           </foreignObject>
 
           {/* 'Join Us' Link with Arrow with fluid text size */}
-          <foreignObject x="8%" y="75%" width="50%" height="15%">
+          <foreignObject className="hidden md:flex" x="10%" y="75%" width="50%" height="15%">
             <div
               xmlns="http://www.w3.org/1999/xhtml"
-              className="flex items-center text-white cursor-pointer gap-2 text-[clamp(0.875rem,2vw,1rem)]"
+              className="flex items-center text-white cursor-pointer gap-2 text-[clamp(0.885rem,1.5vw,1.4rem)]"
             >
               <span>Join Us</span>
               <FiArrowUpRight />
