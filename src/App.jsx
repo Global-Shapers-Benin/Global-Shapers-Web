@@ -1,11 +1,10 @@
 // In your AppRouter.jsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Project from "./pages/Project";
 import Layout   from './components/Layout';
-import WorkSeries from "./components/Project/WorkSeries.jsx"; // Make sure the path is correct
- // Make sure the path is correct
+import WorkSeries from "./components/Project/WorkSeries.jsx";
  import ScrollToTop from "./components/ScrollToTop";
 import Contact from './pages/Contact.jsx';
 import JoinUs from './pages/Join.jsx';

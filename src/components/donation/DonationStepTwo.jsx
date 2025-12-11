@@ -1,4 +1,3 @@
-import React from "react";
 import FAQ from "../Contribute/FAQ";
 import donate from "../../assets/donate.png";
 
